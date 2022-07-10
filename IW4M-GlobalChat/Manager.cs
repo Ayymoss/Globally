@@ -10,32 +10,55 @@ public class Manager
     {
         if (client.GetAdditionalProperty<bool>("GCToggle"))
         {
-            client.SetAdditionalProperty("GCToggle", false);
-            RemoveGlobalChatUser(client);
+            ManageGlobalChatUsers(client, Action.Remove);
             return false;
         }
 
-        client.SetAdditionalProperty("GCToggle", true);
-        _globalChatUsers.Add(client);
+        ManageGlobalChatUsers(client, Action.Add);
         return true;
     }
 
     // TODO: Maybe add a chat queuing system to prevent IW4MAdmin flooding?
     public void SendGlobalChatMessage(EFClient client, string message)
     {
-        foreach (var globalChatUser in _globalChatUsers
-                     .Where(globalChatUser => globalChatUser.IsIngame)
-                     .Where(globalChatUser => globalChatUser.CurrentServer != client.CurrentServer))
+        lock (_globalChatUsers)
         {
-            globalChatUser.Tell($"[{client.CurrentServer.Hostname}] {client.Name}: {message}");
+            foreach (var globalChatUser in _globalChatUsers
+                         .Where(globalChatUser => globalChatUser.IsIngame)
+                         .Where(globalChatUser => globalChatUser.CurrentServer != client.CurrentServer))
+            {
+                globalChatUser.Tell(
+                    $"[{client.CurrentServer.Hostname}(Color::White)] {client.Name}(Color::White): {message}");
+            }
         }
     }
 
-    public void RemoveGlobalChatUser(EFClient client)
+    public void ManageGlobalChatUsers(EFClient client, Action action)
     {
-        if (_globalChatUsers.Contains(client))
+        lock (_globalChatUsers)
         {
-            _globalChatUsers.Remove(client);
+            switch (action)
+            {
+                case Action.Add:
+                    client.SetAdditionalProperty("GCToggle", true);
+                    _globalChatUsers.Add(client);
+                    break;
+                case Action.Remove:
+                    client.SetAdditionalProperty("GCToggle", false);
+                    if (_globalChatUsers.Contains(client))
+                    {
+                        _globalChatUsers.Remove(client);
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(action), action, null);
+            }
         }
     }
+}
+
+public enum Action
+{
+    Add,
+    Remove
 }

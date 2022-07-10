@@ -33,7 +33,7 @@ public class Plugin : IPlugin
         switch (gameEvent.Type)
         {
             case GameEvent.EventType.Disconnect:
-                Manager.RemoveGlobalChatUser(gameEvent.Origin);
+                Manager.ManageGlobalChatUsers(gameEvent.Origin, Action.Remove);
                 break;
             case GameEvent.EventType.Say:
                 Manager.SendGlobalChatMessage(gameEvent.Origin, gameEvent.Message);

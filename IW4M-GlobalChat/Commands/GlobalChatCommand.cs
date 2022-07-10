@@ -21,11 +21,11 @@ public class GlobalChatCommand : Command
 
         if (Plugin.Manager.GlobalChatCommand(gameEvent.Origin))
         {
-            gameEvent.Origin.Tell("Global Chat Enabled");
+            gameEvent.Origin.Tell("(Color::Accent)Global Chat: (Color::Green)Enabled");
             return Task.CompletedTask;
         }
 
-        gameEvent.Origin.Tell("Global Chat Disabled");
+        gameEvent.Origin.Tell("(Color::Accent)Global Chat: (Color::Red)Disabled");
         return Task.CompletedTask;
     }
 }
