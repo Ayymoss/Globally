@@ -49,6 +49,7 @@ public class Manager
                     {
                         _globalChatUsers.Remove(client);
                     }
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(action), action, null);

@@ -18,13 +18,13 @@ public class Plugin : IPlugin
 
     public Task OnLoadAsync(IManager manager)
     {
-        Console.WriteLine($"[{Name}] loaded");
+        Console.WriteLine($"[{Name}] loaded (v{Version})");
         return Task.CompletedTask;
     }
 
     public Task OnUnloadAsync()
     {
-        Console.WriteLine($"[{Name}] unloaded");
+        Console.WriteLine($"[{Name}] unloaded (v{Version})");
         return Task.CompletedTask;
     }
 

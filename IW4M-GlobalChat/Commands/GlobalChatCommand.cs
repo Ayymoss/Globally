@@ -18,7 +18,6 @@ public class GlobalChatCommand : Command
 
     public override Task ExecuteAsync(GameEvent gameEvent)
     {
-
         if (Plugin.Manager.GlobalChatCommand(gameEvent.Origin))
         {
             gameEvent.Origin.Tell("(Color::Accent)Global Chat: (Color::Green)Enabled");
