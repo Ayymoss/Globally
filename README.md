@@ -15,4 +15,4 @@ I wanted to keep this plugin lightweight and adding persistents will require me 
 
 (It looks like this - note it doesn't repeat messages from local server as shown below, is just for showcasing purposes)
 
-![image](https://user-images.githubusercontent.com/4959320/178148392-c9723019-8d3b-4120-895f-351285d1f352.png)
+![image](https://user-images.githubusercontent.com/4959320/178149452-7f8a5487-51ef-4508-a02c-46ab5b9823de.png)
