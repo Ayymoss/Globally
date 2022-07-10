@@ -11,7 +11,7 @@ public class Manager
         if (client.GetAdditionalProperty<bool>("GCToggle"))
         {
             client.SetAdditionalProperty("GCToggle", false);
-            _globalChatUsers.Remove(client);
+            RemoveGlobalChatUser(client);
             return false;
         }
 
@@ -20,13 +20,22 @@ public class Manager
         return true;
     }
 
+    // TODO: Maybe add a chat queuing system to prevent IW4MAdmin flooding?
     public void SendGlobalChatMessage(EFClient client, string message)
     {
         foreach (var globalChatUser in _globalChatUsers
                      .Where(globalChatUser => globalChatUser.IsIngame)
                      .Where(globalChatUser => globalChatUser.CurrentServer != client.CurrentServer))
         {
-            globalChatUser.Tell($"[{client.CurrentServer.Hostname}] {client.CleanedName}: {message}");
+            globalChatUser.Tell($"[{client.CurrentServer.Hostname}] {client.Name}: {message}");
+        }
+    }
+
+    public void RemoveGlobalChatUser(EFClient client)
+    {
+        if (_globalChatUsers.Contains(client))
+        {
+            _globalChatUsers.Remove(client);
         }
     }
 }

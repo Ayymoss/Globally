@@ -18,12 +18,13 @@ public class Plugin : IPlugin
 
     public Task OnLoadAsync(IManager manager)
     {
-        Console.WriteLine("IW4M Global Chat loaded");
+        Console.WriteLine($"[{Name}] loaded");
         return Task.CompletedTask;
     }
 
     public Task OnUnloadAsync()
     {
+        Console.WriteLine($"[{Name}] unloaded");
         return Task.CompletedTask;
     }
 
@@ -31,6 +32,9 @@ public class Plugin : IPlugin
     {
         switch (gameEvent.Type)
         {
+            case GameEvent.EventType.Disconnect:
+                Manager.RemoveGlobalChatUser(gameEvent.Origin);
+                break;
             case GameEvent.EventType.Say:
                 Manager.SendGlobalChatMessage(gameEvent.Origin, gameEvent.Message);
                 break;
