@@ -12,9 +12,9 @@ public class Plugin : IPlugin
 
     public static Manager Manager;
 
-    public string Name { get; }
-    public float Version { get; }
-    public string Author { get; }
+    public string Name => "IW4M Global Chat";
+    public float Version => 20220710f;
+    public string Author => "Amos";
 
     public Task OnLoadAsync(IManager manager)
     {
