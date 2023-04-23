@@ -9,7 +9,7 @@ namespace GlobalChat;
 public class Plugin : IPluginV2
 {
     private readonly GlobalChatManager _globalChatManager;
-    public string Name => "Global Chat";
+    public string Name => "Globally";
     public string Version => "2023-04-23";
     public string Author => "Amos";
 

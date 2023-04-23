@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalChat", "GlobalChat\GlobalChat.csproj", "{F9A1F939-AD0A-4128-9D66-B046CED1744C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Globally", "Globally\Globally.csproj", "{F9A1F939-AD0A-4128-9D66-B046CED1744C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
