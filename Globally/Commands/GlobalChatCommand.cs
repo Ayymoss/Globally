@@ -3,7 +3,7 @@ using SharedLibraryCore;
 using SharedLibraryCore.Configuration;
 using SharedLibraryCore.Interfaces;
 
-namespace GlobalChat.Commands;
+namespace Globally.Commands;
 
 public class GlobalChatCommand : Command
 {

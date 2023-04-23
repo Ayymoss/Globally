@@ -1,6 +1,6 @@
 ﻿using SharedLibraryCore.Database.Models;
 
-namespace GlobalChat;
+namespace Globally;
 
 public class GlobalChatManager
 {

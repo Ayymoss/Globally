@@ -4,7 +4,7 @@ using SharedLibraryCore.Events.Management;
 using SharedLibraryCore.Interfaces;
 using SharedLibraryCore.Interfaces.Events;
 
-namespace GlobalChat;
+namespace Globally;
 
 public class Plugin : IPluginV2
 {
