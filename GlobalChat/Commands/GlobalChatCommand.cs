@@ -3,12 +3,15 @@ using SharedLibraryCore;
 using SharedLibraryCore.Configuration;
 using SharedLibraryCore.Interfaces;
 
-namespace IW4M_GlobalChat.Commands;
+namespace GlobalChat.Commands;
 
 public class GlobalChatCommand : Command
 {
-    public GlobalChatCommand(CommandConfiguration config, ITranslationLookup layout) : base(config, layout)
+    private readonly GlobalChatManager _globalChatManager;
+
+    public GlobalChatCommand(CommandConfiguration config, ITranslationLookup layout, GlobalChatManager globalChatManager) : base(config, layout)
     {
+        _globalChatManager = globalChatManager;
         Name = "globalchat";
         Description = "Toggle Global Chat";
         Alias = "gc";
@@ -18,7 +21,7 @@ public class GlobalChatCommand : Command
 
     public override Task ExecuteAsync(GameEvent gameEvent)
     {
-        if (Plugin.Manager.GlobalChatCommand(gameEvent.Origin))
+        if (_globalChatManager.GlobalChatCommand(gameEvent.Origin))
         {
             gameEvent.Origin.Tell("(Color::Accent)Global Chat: (Color::Green)Enabled");
             return Task.CompletedTask;

@@ -1,8 +1,8 @@
 ﻿using SharedLibraryCore.Database.Models;
 
-namespace IW4M_GlobalChat;
+namespace GlobalChat;
 
-public class Manager
+public class GlobalChatManager
 {
     private readonly List<EFClient> _globalChatUsers = new();
 
@@ -18,14 +18,13 @@ public class Manager
         return true;
     }
 
-    // TODO: Maybe add a chat queuing system to prevent IW4MAdmin flooding?
     public void SendGlobalChatMessage(EFClient client, string message)
     {
         lock (_globalChatUsers)
         {
             foreach (var globalChatUser in _globalChatUsers
                          .Where(globalChatUser => globalChatUser.IsIngame)
-                         .Where(globalChatUser => globalChatUser.CurrentServer != client.CurrentServer))
+                         /*.Where(globalChatUser => globalChatUser.CurrentServer != client.CurrentServer)*/)
             {
                 globalChatUser.Tell(
                     $"[{client.CurrentServer.Hostname}(Color::White)] {client.Name}(Color::White): {message}");
