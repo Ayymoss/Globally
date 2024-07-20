@@ -10,7 +10,7 @@ public class Plugin : IPluginV2
 {
     private readonly GlobalChatManager _globalChatManager;
     public string Name => "Globally";
-    public string Version => "2023-04-23";
+    public string Version => "2024-07-21";
     public string Author => "Amos";
 
     public Plugin(GlobalChatManager globalChatManager)

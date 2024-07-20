@@ -9,7 +9,8 @@ public class GlobalChatCommand : Command
 {
     private readonly GlobalChatManager _globalChatManager;
 
-    public GlobalChatCommand(CommandConfiguration config, ITranslationLookup layout, GlobalChatManager globalChatManager) : base(config, layout)
+    public GlobalChatCommand(CommandConfiguration config, ITranslationLookup layout, GlobalChatManager globalChatManager)
+        : base(config, layout)
     {
         _globalChatManager = globalChatManager;
         Name = "globalchat";

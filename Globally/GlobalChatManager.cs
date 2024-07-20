@@ -4,7 +4,7 @@ namespace Globally;
 
 public class GlobalChatManager
 {
-    private readonly List<EFClient> _globalChatUsers = new();
+    private readonly List<EFClient> _globalChatUsers = [];
 
     public bool GlobalChatCommand(EFClient client)
     {
@@ -22,12 +22,13 @@ public class GlobalChatManager
     {
         lock (_globalChatUsers)
         {
-            foreach (var globalChatUser in _globalChatUsers
-                         .Where(globalChatUser => globalChatUser.IsIngame)
-                         /*.Where(globalChatUser => globalChatUser.CurrentServer != client.CurrentServer)*/)
+            var globalChatUsers = _globalChatUsers
+                .Where(globalChatUser => globalChatUser.IsIngame)
+                .Where(globalChatUser => globalChatUser.CurrentServer != client.CurrentServer);
+
+            foreach (var globalChatUser in globalChatUsers)
             {
-                globalChatUser.Tell(
-                    $"[{client.CurrentServer.Hostname}(Color::White)] {client.Name}(Color::White): {message}");
+                globalChatUser.Tell($"[{client.CurrentServer.Hostname}(Color::White)] {client.Name}(Color::White): {message}");
             }
         }
     }
@@ -44,11 +45,7 @@ public class GlobalChatManager
                     break;
                 case Action.Remove:
                     client.SetAdditionalProperty("GCToggle", false);
-                    if (_globalChatUsers.Contains(client))
-                    {
-                        _globalChatUsers.Remove(client);
-                    }
-
+                    _globalChatUsers.Remove(client);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(action), action, null);
